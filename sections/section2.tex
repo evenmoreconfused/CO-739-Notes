@@ -1,0 +1,347 @@
+\newpage
+\section{Algebraic Geometry}
+
+Let $S = K [ x_1, \cdots , x_n], F \subset S$. We have a notion of a variety
+\begin{align*}
+    V(F) = \set{ (p_1, \cdots , c_n ) \in K^n  \mid f(p) = 0 \, \forall f \in F }
+\end{align*}
+the vanishing locus of $F$.
+
+\begin{example}
+$S = \R; V ( x^2 + y^2 -1) = \set{(p_1, p_2 ) \R^2 \mid p_1^2 + p_2^2 = 1 } = S^1$.
+\end{example}
+
+\begin{example}
+$K = \R , V( xy-z, yz -x , xz - y) , S = \R [ x,y,z]$.
+\begin{align*}
+    V = \set{ ( 0,0,0) , (1,1,1) , (-1, -1, 1) , (-1, 1 ,-1) , (1 , -1 , -1) }.
+\end{align*}
+\end{example}
+
+There are two points of contention with this construction. First there are multiple sets that map to the empty set.
+
+\begin{example}
+    $K = \R, S = K[x,y] , V (1) = \set{( x,y) \in \R^2 \mid 1 = 0} = \emptyset$
+\end{example}
+
+\begin{example}
+    $K = \R , S = K [ x,y], V( x^2 + y^2 +1 ) = \emptyset$.
+\end{example}
+
+Second it is not an injective relationship.
+
+\begin{example}
+    $V(x) = \set{p \in \R \mid p = 0} = \set{ 0}$.
+\end{example}
+
+\begin{example}
+    $V(x^2) = \set{p \in \R \mid p^2 = 0} = \set{ 0}$.
+\end{example}
+
+We have the following lemma which helps us deal with ideals of polynomials.
+
+\begin{lemma}\label{happyLemma}
+Let $I = (F) $. Then $V(F) = V(I)$.
+\end{lemma}
+
+\begin{proof}[sketch]
+\phantom{.}
+\begin{enumerate}
+    \item[$\supseteq$] : Let $p \in V(I)$. Then every polynomial in $I$ vanishes on $p$, but $F \subset I$ setwise.
+    \item[$\subseteq$] : Let $p \in V(F)$. Then every polynomial in $F$ vanishes on $p$, but every polynomial in $I $ is a linear combination of polynomials in $F$ and thus every polynomial in $I $ vanishes on $p$.
+\end{enumerate}
+\end{proof}
+
+\begin{lemma}\label{sadLemma}
+Let $I$ be an ideal. Then $V(I) = V(\sqrt{I})$.
+\end{lemma}
+
+\begin{proof}[sketch]
+The $\supseteq$ inclusion is clear since $I \subseteq \sqrt{I}$. To prove the other direction, notice that for $g$ a polynomial, $g^k( p) = \left( g(p)\right) ^k 0 \implies g(p) = 0$.
+\end{proof}
+
+Lemma \ref{happyLemma} as a Lemma is good for us since it lets us deal with vanishing loci of a finite set of polynomials instead of an infinite set. Lemma \ref{sadLemma} is however bad for us as we are not able to differentiate between the vanishing locus of an ideal and the vanishing locus of the radical of that ideal. It will take some work to fix this.
+
+\begin{definition}
+Let $V(F) = X$ be a variety. Then its radical ideal is the set
+\begin{align*}
+    I(X) = \set{ f : K[ \underline{x} ] \mid f(x) = 0 \, \forall x \in X}.
+\end{align*}
+\end{definition}
+
+
+This construction is the naive way of constructing an inverse for the operation $V( \cdot )$, by simply taking each possible polynomial that could produce our variety.
+
+\begin{lemma}
+$I(X) $ is a radical ideal.
+\end{lemma}
+
+\begin{lemma}
+$\sqrt{ (F) } \subseteq I(X)$.
+\end{lemma}
+
+\begin{proof}[sketch]
+$F$ must be in $I(X)$. Then any combination of elements of $F$ is still in $I(X)$ (linear combinations of vanishing things are also vanishing) and so $(F)$ is in $I(X)$. Then anything that vanishes on a set when raised to a power must also vanish on that set when not raised to a power, thus $\sqrt{ (F) }$ is in $I(X)$.
+\end{proof}
+
+\begin{theorem}[Nullstellensatz]
+Suppose that $K = \overline{K}$. Then $I(X) = \sqrt{ (F) }$.
+\end{theorem}
+
+\begin{nexample}
+    $K = \R, \, X = V(x^2 + y^2 +1) = \emptyset$. But $I(X) = K[x,y]$ and $\sqrt{(x^2 + y^2 +1)} \neq K[x,y]$. Note that $\R$ is not algebraically closed.
+\end{nexample}
+
+Usually people stick to algebraically closed fields and radical ideals to circumvent these problems. We do not.
+
+Let $F \subset K[ \underline{x} ] $. Write
+\begin{align*}
+    V(F) = V_K (F) = \set{(p_1, \cdots , p_n ) \in K^n \mid f(p) = 0 \, \forall f \in F}.
+\end{align*}
+For any $K' \supseteq K$ we also have a notion of $V_{K'}(F)$. In fact we also have a notion of $V_R ( F)$ where $R \supseteq K$ is some ring.
+
+\begin{example}
+    \begin{align*}
+        V_\R ( x^2 + y^2 + 1) &= \emptyset & V_\R(1) &= \{ 0 \}  \\
+        V_\C ( x^2 + y^2 + 1) &= \text{ conic section } & V_\C ( 1 ) &= \{ 0 \}.
+    \end{align*}
+\end{example}
+
+Going to a field extension has fixed our problem of multiple ideals mapping to the empty set. However we are not done.
+
+\begin{example}
+    \begin{align*}
+        V_\R ( x) &= V_\R ( x^2) = \emptyset\\
+        V_\C ( x) &= V_\C ( x^2) = \emptyset.
+    \end{align*}
+\end{example}
+
+We still have the problem of not being able to differentiate $x$ and $x^2$. To solve consider the ring
+\begin{align*}
+    R = \R[\epsilon] / (\epsilon^2) = \set{a + b \epsilon + (\epsilon^2) \mid a,b \in \R }.
+\end{align*}
+
+Then we have that
+\begin{align*}
+    V_R(x) &= \set{0 + (\epsilon^2) }\\
+    V_R(x^2) &= \set{b \epsilon + (\epsilon^2)}.
+\end{align*}
+
+\textbf{insert drawing of real line with zero and real line with zero and nbhd of zero}
+
+\section{Schemes}
+
+\begin{definition}
+For $F \subseteq K [ \underline{x}] $ the scheme of $F$ is the data (not a set technically)
+\begin{align*}
+    \set{V_R(F) \mid R \supseteq K} = spec  ( K [ \underline{x}]/(F) ) = V_\infty (F).
+\end{align*}
+\end{definition}
+
+\begin{theorem}
+There is a $1-1$ correspondence between ideals of $K[ \underline{x} ] $ and schemes.
+\end{theorem}
+
+\subsection{Geometry of Ideal Operations}
+
+\begin{itemize}
+    \item $V_\infty ( I + J) = V_\infty (I) \cap V_\infty(J)$,
+    \item $V_\infty ( I \cap J ) = V_\infty(I) \cup V_\infty(J)$,
+    \item $V_\infty ( IJ) = V_\infty ( I \cap J) $ with possibly some extra infinitesimal fuzz,
+    \item $V_\infty (I:J) = V_\infty ( I ) \setminus V_\infty(J)$ and then patch the holes.
+\end{itemize}
+
+\begin{example}
+    $I = (x^2 - y) ; \, J = (y-x-2)$.
+    \textbf{add drawings of V(I) and V(J)}.
+    Then
+    \begin{itemize}
+        \item $I+J = (x^2 - y, y-x, 2)$ (both vanish simultaneously) $\to V(I+J_ = V(I) \cap V(J)$
+        \item $IJ = ( ( x^2 - y) ( y-x-2) )$ (either vanish simultaneously)  $\to V(IJ)$
+        \item $IJ : I = ?? \to V(IJ : I)$
+    \end{itemize}
+\end{example}
+
+\section{Monomial Ideals}
+
+\begin{definition}
+A monomial ideal in $S = K [ \underline{x}] $ is an ideal generated by monomials.
+\end{definition}
+
+\begin{remark}
+Monomials are very good for us. Let $u = x_1^{a_1} \cdots x_n^{a_n}$ and $v = x_1^{b_1} \cdots x_n^{b_n}$. Then
+\begin{itemize}
+    \item $u $ divides $v$ iff $a_i \leq b_i \, \forall i$,
+    \item $\gcd (u,v) = x_1^{\min \set{a_1 , b_1 }} \cdots x_n^{\min \set{a_n , b_n }}$,
+    \item $lcm (u,v) = x_1^{\max \set{a_1 , b_1 }} \cdots x_n^{\max \set{a_1 , b_1 }}$
+\end{itemize}
+\end{remark}
+
+\begin{theorem}
+Let $I \subset S$ be an ideal. Then TFAE
+\begin{enumerate}
+    \item $I $ is a monomial ideal.
+    \item $\forall f \in I, \, supp (f) \subset I$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+to be filled in...
+\end{proof}
+
+\begin{corollary}
+Let $I$ be a monomial ideal, and let $M \subset I$ be a set of monomials. Then $(M) = I$ iff for every monomial $v \in I$ there exists $m \in M$ such that $m \mid v$.
+\end{corollary}
+
+\begin{proof}
+to be filled in...
+\end{proof}
+
+
+\subsection{Geometry of Monomial Ideals}
+
+\begin{definition}
+A hyperplane is a codimension $1$ vector subspace. A coordinate hyperplane is a hyperplane spanned by axes.
+\end{definition}
+
+\begin{example}
+    $S = K [ x,y,z,w]$.
+    \begin{itemize}
+        \item $V(x) = y,x,w \text{-coordinate hyperplane} = x^\bot\text{-coordinate hyperplane}$
+        \item $V(xy) = V(x) \cup V(y) = (x^\bot\text{-coordinate hyperplane}) \cup (y^\bot\text{-coordinate hyperplane})$
+        \item $V(x^2) = (x^\bot\text{-coordinate hyperplane but fuzzy})$
+        \item $V(x^2y) = (x^\bot\text{-coordinate hyperplane but fuzzy}) \cup (y^\bot\text{-coordinate hyperplane})$
+        \item $V(xy^3) = (x^\bot\text{-coordinate hyperplane}) \cup (y^\bot\text{-coordinate hyperplane but very fuzzy})$
+    \end{itemize}
+\end{example}
+
+In general we see that $V(\text{monomial})$ is a union of fuzzy coordinate hyperplanes with
+\begin{align*}
+    a_i > 0 &\iff x_i^\bot\text{-coordinate hyperplane appears}\\
+    a_i &\longleftrightarrow \text{fuzziness of } x_i^\bot\text{-coordinate hyperplane}
+\end{align*}
+
+\begin{example}
+    \phantom{.}
+    \begin{align*}
+        V(xy, xz) &= V ( (xy) + (xz) )\\
+        &= V(xy) \cap V(xz)\\
+        &=(x^\bot \cup y^\bot) \cap (x^\bot \cup z^\bot)\\
+        &= x^\bot \cup (y\bot \cap z^\bot)\\
+        &= (y,z, w\text{-chp}) \cup (x, w\text{ codim 2 chp})
+    \end{align*}
+\end{example}
+
+In general we see that $V(\text{monomial ideal})$ is a union of fuzzy coordinate subspaces.
+
+Consider the partial order of $\N^n$ given by $(a_1 , \cdots a_n) \leq (b_1 , \cdots b_n)$ if and only of $a_i \leq b_i $ for all $1 \leq i \leq n$. We say that $a \in S$ is minimal if there is no $b \in S$ such that $b < a$.
+
+\begin{theorem}[Dickson's Lemma]
+Let $S \subset \N^n$. Then $S $ has only finitely many minimal elements.
+\end{theorem}
+
+\begin{proof}
+to be added...
+\end{proof}
+
+\begin{corollary}
+Let $I$ be a monomial ideal ,and let $M $ be a generating set of monomials. Then there is a finite $M ' \subset M$ such that $(M') = I$.
+\end{corollary}
+
+\begin{proof}[sketch]
+Monomials can be turned into $\N$-tuples. Applying Dickson's Lemma gives the result.
+\end{proof}
+
+\begin{definition}
+Let $M$ be a set of monomials such that $(M) = I$. We say that $M$ is minimal if there are no proper subsets of $M$ that generate $I$.
+\end{definition}
+
+\begin{proposition}
+Each monomial ideal $I$ has a unique minimal set of monomial generators.
+\end{proposition}
+
+\begin{proof}
+to be added...
+\end{proof}
+
+The unique (canonical) generating set of $I$ is denoted $G(I)$.
+
+\begin{proposition}\label{monoStab}
+Every ascending chain of monomial ideals $I_1 \subseteq I_2 \subseteq \cdots$ stabilizes. That is to say that there exists $N$ such that $I_{n+1 } = I_n$ for all $n > N$.
+\end{proposition}
+
+
+\begin{proof}
+to be added...
+\end{proof}
+
+
+\subsection{Operations on Monomial Ideals}
+
+Let $I, J $ be monomial ideals. Then
+\begin{itemize}
+    \item $I + J$ is a monomial ideal with $G(I + J) \subseteq G(I) \cup G(J)$.
+    \begin{example}
+        Let 
+        
+        \begin{align*}
+            I &= (xy, yz^2) = (y^\bot \text{-plane}) \cup (y \text{-axis with fuzzy } z \text{ direction}))\\
+            J &= (x^2y, yz) = (y^\bot \text{-plane}) \cup (y \text{-axis with fuzzy } x \text{ direction}))\\
+        \end{align*}
+        
+        Then we have
+        \begin{align*}
+            I + J = ( xy , yz^2 , x^2 y , yz) = (xy, yz) = (y^\bot \text{-plane}) \cup (y \text{-axis}).
+        \end{align*}
+    \end{example}
+    \item $IJ$ is a monomial ideal with $G(I J) \subseteq \set{uv \mid u \in G(I) , v \in G(J)}$.
+    \begin{example}
+        With $I$, $J$ as before, then we have
+        \begin{align*}
+            I J = ( x^3y^2, xy^2z , x^2y^2z^2, y^2 z^3) = ( x^3y^2, xy^2z, y^2 z^3) = (y^\bot \text{-plane fuzzy}) \cup (y \text{-axis v fuzzy}).
+        \end{align*}
+    \end{example}
+    \item $I \cap J$ is a monomial ideal with $G(I \cap J) = ( \set{ lcm(u,v) \mid u \in G(I) , v \in G(J)} )$.
+    \begin{example}
+        With $I$, $J$ as before, then we have
+        \begin{align*}
+            I \cap J &= ( x^2y, xyz , x^2yz^2, y z^2) = ( x^2y, xyz , y z^2)\\ &= (y^\bot \text{-plane fuzzy}) \cup (y \text{-axis with x and z fuzz, and ``xz" fuzz}).
+        \end{align*}
+    \end{example}
+    \item $I : J$ is a monomial ideal. Then
+    \begin{align*}
+        I : J &=  \bigcap_{v \in G(J) } I : (v)\\
+        I : (v) &= \left ( \left \{ \frac{u}{\gcd(u,v) } \mid u \in G(I)  \right \} \right ).
+    \end{align*}
+    \begin{example}
+        With $I$, $J$ as before, then we have
+        \begin{align*}
+            I : J &= (I : (x^2 y) ) \cap ( I : (yz)) = (1,z^2 ) \cap (x,z) = (x,z)\\ &=  (y \text{-axis}).
+        \end{align*}
+    \end{example}
+\end{itemize}
+
+
+\subsection{Squarefree and Prime Ideals}
+
+\begin{definition}
+A monomial is squarefree if it has no exponents greater than $1$. I is a squarefree monomial ideal if it can be generated by squarefree monomials, ie $G(I)$ is all squarefree.
+\end{definition}
+
+\begin{definition}
+An ideal $I$ is prime if $fg \in I$ implies that either $f\in I$ or $g \in I$. Equivalently $I$ is prime if $S / I$ is a domain (no zero divisors).
+\end{definition}
+
+\begin{proposition}
+Let $I$ be a squarefree monomial ideal. Then $I $ is a finite intersection of monomial prime ideals.
+\end{proposition}
+
+% here he points out that the $xy$ fuzziness of $V(xy)$ at $0$ is embedded into the picture formed by the x and y axes. ie we do not have to worry about fuzziness from things where $x, y \neq 0$ but $xy = 0$.
+
+\begin{corollary}
+Let $I$ be a monomial ideal. Then $I$ is radical iff $I$ is squarefree.
+\end{corollary}
+
+\begin{theorem}
+Let $I$ be a monomial ideal. Then $\sqrt{I} = \set{\sqrt{u } \mid u \in G(I)}$, where $\sqrt{u}$ means set all the exponents $>1$ of $u$ to $1$.
+\end{theorem}

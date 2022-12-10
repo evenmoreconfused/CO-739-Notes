@@ -1,0 +1,53 @@
+\documentclass[11pt, twoside]{article}	% Always compile at least twice.
+\usepackage[lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in]{geometry}
+
+% Cover Information
+\def\univname{University of Waterloo}
+\def\coursenum{CO 739}
+\def\coursename{Combinatorial Commutative Algebra}
+\def\professor{Oliver Pechenik}
+\def\student{Alexander Kroitor}
+\def\semesteryear{Fall 2022}
+\def\imagename{UWseal.png}		    % Replace with University Seal
+\def\scalesize{0.50}					% Scale Logo Size 
+
+% Style Package (Load After Cover Information)
+\usepackage{CO739}	% Change to match style file
+
+
+% -------------------
+% Content
+% -------------------
+\begin{document}
+
+
+% Cover Page
+\coverpage
+
+% Last Updated
+\updated{\today}
+
+% Table of Contents
+\thispagestyle{empty}
+\tableofcontents
+\newpage
+\pagestyle{fancy}
+\setcounter{section}{-1}
+\setcounter{page}{1}
+
+% Sections
+\input{sections/section0}
+\input{sections/section1}
+\input{sections/section2}
+\input{sections/section3}
+\input{sections/section4}
+\input{sections/section5}
+\input{sections/section6}
+
+% Bibliography
+% \newpage
+% \nocite{*}
+% \printbibliography[heading=bibintoc]
+
+
+\end{document}

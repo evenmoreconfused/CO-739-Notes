@@ -1,0 +1,395 @@
+\newpage
+\section{Geometry}
+
+
+We now turn to the geometry of Grober degeneration.
+
+\subsection{Introduction to Geometry}
+
+We start with a longer example demonstrating the idea that we will work towards.
+
+
+Let $S = \R [x,y ]$
+
+Let $I = (xy -1)$.
+Then $V(I) = $
+
+INCLUDE GRAPHICS
+
+We have $in(I) = (xy) $. Then $V(in(I)) = $
+
+INCLUDE GRAPHICS
+
+Now define $T = S[t] = \R [x,y,t]$ and relate $f = xy-1 \in S$ to $\hat{f} = xy - t^2 \in T$.
+
+We have the following cross-sections for various values of $t$:
+
+$t = 1$:
+
+INCLUDE GRAPHICS
+
+$t = 0$:
+
+INCLUDE GRAPHICS
+
+$t = \varepsilon$:
+
+INCLUDE GRAPHICS
+
+In fact we have that $V(xy- t^2) = $ hyperbolic paraboloid:
+
+INCLUDE GRAPHICS
+
+Think about the hyperbolic paraboloid $P$ as a family of conics over a line (as $t \in \R$, but not really since that only gives us positive $t$'s).
+
+\begin{definition}
+Define 
+\begin{align*}
+    \pi : P &\to \R\\
+    (x,y,t) &\to t
+\end{align*}
+and define the fibre at $t = \hat{t}$ to be $\pi^{-1} (\hat{t}) = \set{ (x,y,t) \in P \mid t = \hat{t} }$.
+\end{definition}
+
+Each of these fibres is a hyperbola, except for $\pi^{-1}(0) = $ two lines crossing. The natural way to think about this is that $P$ is all fibres glued together in some continuous fashion over some base space (usually a line).
+
+We have that this family of conics is flat, ie $\pi$ is flat (whatever flat means).
+
+\subsection{Isomorphism of Schemes}
+
+Consider the three varieties $V(x^2 + y^2 - 1), V((x-2)^2 + (y-1)^2 - 1),V(x^2 + y^2 - 4)$:
+
+INCLUDE GRAPHICS
+
+We can see that these three schemes are basically the same, though set-wise they are very different. We want a way to declare similar schemes as the same.
+
+\begin{definition}
+For $I \subset S, I' \subset S'$, we say that the schemes $V(I)$ and $V(I') $ are isomorphic if $S / I \cong S'/I'$ as rings. We write $V(I) \cong V(I')$.  
+\end{definition}
+
+For our $P$, all the fibres $\pi^{-1} (\hat{t}), \hat{t} \neq 0 $, are isomorphic as
+
+\begin{align*}
+    \R [ x,y] / (xy - 1) \cong \,\, &\R [x,x^{-1}]\\
+    & \,\,\,\, \rotatebox{90}{$\cong$}\\
+    \R [ x,y] / (xy - \hat{t}) \cong \,\,  &\R [x,\hat{t} x^{-1}]
+\end{align*}
+
+But note that $\R[x,y] / (xy) \neq \R[x,x^{-1}$ (this is not a domain).
+
+In our case the hyperbola is the general fibre and the two lines crossing is the special fibre. We have degenerated the general fibre to the special one.
+
+\subsection{Actual Math}
+
+In general we choose an integral weight function $\lambda : \Z^n  \to \Z$ (this is a linear function). This gives a partial order $<_\lambda$ on monomials by comparing the weights.
+
+Let $in_\lambda(g) $ be the initial form, the sum of all the maximal terms (wrt $<_\lambda$) of $g$.
+
+Integral weight orders are enough to capture all initial ideals.
+
+\begin{theorem}
+Let $<$ be a monomial order and $\set{ g_1, \cdots, g_k }$ be a Grobner basis for $I$ with respect to $<$ then there is a finite set of pairs of monomials.
+
+\begin{align*}
+    F = \set{ (m_1^1 < m_2^1 ) , \cdots, ( m_1^r < m_2^r ) }
+\end{align*}
+such that for any integral weight order $<_\lambda$ with 
+\begin{align*}
+m_1^1 <_\lambda m_2^1, \cdots , m_1^r <_\lambda m_2^r,
+\end{align*}
+then $in_\lambda (I) = in_< (I)$ and $\set{g_1, \cdots g_k}$ is a $<_\lambda $ Grobner basis for $I$.
+\end{theorem}
+
+\begin{proof}
+proof excluded
+\end{proof}
+
+\subsection{Degenerating}
+
+The main idea is:
+\begin{itemize}
+    \item let $K = \C$
+    \item fix $0 \neq\hat{t} \notin \C \leftarrow$ imagine very small
+    \item fix an integral weight order $<_\lambda$
+\end{itemize}
+
+Then
+\begin{align*}
+    \phi_\lambda^i : S &\to S\\
+    x_i &\mapsto x_i \hat{t}^{- \lambda (x_i)}
+\end{align*}
+is an automorphism. So is $\phi_\lambda = \phi_\lambda^1 \circ \phi_\lambda^2 \circ \cdots \circ \phi_\lambda^n$ (these all commute).
+
+Clearly $S/I \cong S / \phi_\lambda (I)$, but as $\hat{t} \to 0$, $\phi_\lambda (I) \to in_\lambda(I)$ because the leading form starts to dominate.
+
+A better way to do this is:
+
+Let $T = S[ t]$ be a polynomial ring in $1$ more variable. For $f \in S$, let $\hat{f} \in T$ be
+\begin{align*}
+    \hat{f} = t^M \phi_\lambda (f) = t^M f(t^{-\lambda (x_1)} x_1, \cdots,t^{-\lambda (x_n)} x_n)
+\end{align*}
+where $M = max \set{ \lambda(m) \mid m \in supp(f) }$.
+
+Note that $in(f)$ is unchanged, but all the other terms are now divisible by $t$.
+
+For an ideal $I \subset S$, let $\hat{I} = (\hat{g} \mid g \in I) \subset S[t]$. Then $V(\hat{I}) $ is a flat family with general fibre isomorphic to $V(I)$ and special fibre $V(in_\lambda I)$.
+
+Flatness: how to identify in real life
+\begin{enumerate}
+    \item projections from a product are flat $[X \times Y \to X]$
+    \item flatness is a local property on the base
+    \begin{corollary}
+    Anything that's locally a projection is flat (fibre bundles)
+    \end{corollary}
+    \item if $X$ is reduced and irreducible and $C$ is a smooth curve, then $X \to C$ is flat
+    \item if all fibres come from homogeneous ideals, flatness is equivalent to ``every fibre has the same Hilbert function"
+\end{enumerate}
+
+\subsection{Modules}
+
+Let $R$ be a commutative ring (think $R = S$).
+
+\begin{definition}
+An $R$-module is an abelian group $M$ (``vector space over a ring $R$") with a scalar multiplication by elements of $R$ satisfying (with $f,g \in R, n,m \in M$)
+\begin{enumerate}
+    \item $f(m+n) = fm+fn$
+    \item $(f+g) m = fm+gm$
+    \item $(fg)m = f(g(m))$
+    \item $1 \cdot m = m$
+\end{enumerate}
+\end{definition}
+
+\begin{example}
+We have
+\begin{enumerate}
+    \item if $R$ is a field then $m$ is an $R$ vector space
+    \item if $R = \Z$, modules are just abelian groups
+    \begin{align*}
+        r \cdot m = \sum_{i=1}^r m
+    \end{align*}
+    \item if $R = S$, and ideal $I$ is an $S$-module and so is $S/I$
+\end{enumerate}
+\end{example}
+
+So before the we had $S$ being a ring and $I$ being a weird thing, but now we can relate: ???
+
+
+
+Note that subgroups of abelian groups are normal.
+\begin{definition}
+For a subset $G \subset M$ we define $(G)$ to be the submodule generate by $G$, the set of all $R$-linear combinations of elements of $G$. If $(G) = M$, then $G$ is a system of generators for $M$. If $M$ admits a finite generating set, $M$ is finitely generated.
+\end{definition}
+
+\begin{definition}
+If every element of $M$ can be written uniquely as an $R$-linear combination of $G$, then $G$ is a basis.
+\end{definition}
+
+\begin{nexample}
+$S = K [ x,y] \supset I = (x,y) $ has no basis as:
+
+Suppose it had a $1$-element basis $\{g \}$. This is absurd.
+Suppose it had a larger basis $G$, let $g_1, g_2 \in G$ then $g = g_1 g_2 \in I$, but $g = g_1 (g_2) = g_2 (g_1)$. ie $g = a g_2 = bg_1$, so we don't have uniqueness.
+\end{nexample}
+
+\begin{definition}
+A module $F$ with a basis is free.
+\end{definition}
+
+\begin{example}
+Each vector space is a free module.
+\end{example}
+
+\begin{example}
+$R^n$ is a free module.
+\end{example}
+
+\begin{lemma}
+Let $F$ be a free module with a basis of size $n$. Then each basis has size $n$ (call $n$ the rank of $F$).
+\end{lemma}
+
+\begin{proof}
+Let $I$ be a maximal ideal of $R$. Then a basis of $F$ induces a basis of the $R/I$-module $F/IF$ (this is proven in homework).
+But $R/I$ is a field, so $F/IF$ is a vector space. So all bases have the same cardinality.
+\end{proof}
+
+\begin{definition}
+A map $\phi: M \to N$ of $R$-modules is a homomorphism if $\phi$ is a homomorphism of abelian groups with $\phi(rm) = r \phi(m), \forall r \in R, m \in M$.
+\end{definition}
+
+\begin{proposition}
+Let $M $ be an $R$-module. Then $M$ is a quotient of free modules. ie $\exists $ a free module $F$ with a submodule $U \subset F$ such that $M \cong F/U$. ie $M$ is finitely generated, we can choose $F$ finitely generated (the category of $R$-modules has enough projectives).
+\end{proposition}
+
+\begin{proof}
+Let $G$ be a generating set for $M$. Let $F = Fun_{f s} (G,R)$ be the set of functions $f : G \to R$ such that $f(g) = 0$ for all but finitely many $g \in G$. This is an abelian group under component-wise addition and an $R $-module with scalars acting diagonally
+\begin{align*}
+    (f_1 + f_2 ) (g) = f_1(g) + f_2(g),\\
+    (rf)(g) = r \cdot f(g)
+\end{align*}
+
+For each $\hat{g} \in G$ there's a special $e_{\hat{g}} \in F$ given by $e_{\hat{g}} ( g) = \delta_{{g, \hat{g}}} \in R$. Then $\{ e_{\hat{g}} \}_{\hat{g} \in G}$ is a basis for $F$, so $F$ is free.
+
+Define 
+\begin{align*}
+    \epsilon : F &\to M\\
+    f &\mapsto \sum_{g \in G} f(g) g.
+\end{align*}
+This is a surjective homomorphism, so by the first isomorphism theorem $M \cong F / ker(\epsilon)$
+
+Fact: if $M \subset N$ are $K [ x_1, \cdots, x_n ] $-modules and $N  $ is finitely generated, then $M$ is finitely generated.
+
+Let $M $ be a finitely generated $S$-module, we have a finitely generated free $S$-module $F_0$ with $F_0 \xrightarrowdbl{\epsilon} M $. Let $U_1 = ker (\epsilon)$. By the fact, $U_1$ is finitely generated. So $\exists F_1 $ (free) with $F_1 \xrightarrowdbl{\epsilon_1} M_1$; $U_1 \xhookrightarrow{\iota} F_0 \xrightarrowdbl{} M$. Let $\phi_1: F_1 \to F_0$ be $\phi_1 = \iota \circ \epsilon_1$. Note $in(\phi_1) = U_1 = ker(\epsilon)$ with $F_1 \xrightarrow{\phi_1} F_0 \xrightarrow{\epsilon}M$.
+
+Let $U_2 = ker(\phi)$, it's finitely generated, so $\exists F_2$ (free), and $\phi_2 : F_2 \to F_1$ with $im (\phi_2) = U_2 = ker(\phi_1) $, etc.
+
+We get a diagram
+\begin{center}
+    \begin{tikzcd}
+        & \cdots \arrow[r, "\phi_3"] & F_2 \arrow[r, "\phi_2"] & F_1 \arrow[r, "\phi_1"] & F_0 \arrow[r, "\epsilon"] & M \arrow[r] & 0
+    \end{tikzcd}
+\end{center}
+\end{proof}
+
+such that each module has $im(\text{incoming}) = ker(\text{outgoing})$. Such a sequence is called exact.
+
+In this sequence there will be a ``best one" which will tell us stuff.
+
+\subsection{Minimal Free Resolutions}
+
+\begin{definition}
+    A exact sequence of the form
+    \begin{center}
+        \begin{tikzcd}
+            & \cdots \arrow[r, "\phi_3"] & F_2 \arrow[r, "\phi_2"] & F_1 \arrow[r, "\phi_1"] & F_0 \arrow[r, "\epsilon"] & M \arrow[r] & 0,
+        \end{tikzcd}
+    \end{center}
+    where each module $F_i$ is free, is called a free resolution of $M$. The image of $\phi_i$ is called the $i$th syzygy module.
+\end{definition}
+
+\begin{theorem}[Hilbert's syzygy theorem]
+    Let $M$ be a finitely generated $S$-module, with $S = K [x_1, \cdots , x_n]$. Then $M$ has a free resolution
+    \begin{center}
+        \begin{tikzcd}
+            & 0 \arrow[r] & F_n \arrow[r, hookrightarrow] & F_{n-1} \arrow[r] & \cdots \arrow[r] & F_1 \arrow[r] & F_0 \arrow[r, twoheadrightarrow] & M \arrow[r] & 0.
+        \end{tikzcd}
+    \end{center}
+\end{theorem}
+
+\begin{definition}
+    The $S$-module $M$ is graded if
+    \begin{align*}
+        M = \bigoplus_{i \in \Z} M_i
+    \end{align*}
+    and 
+    \begin{align*}
+        S_ i M_j \subset M_{i+j}.
+    \end{align*}
+    If $M$ is graded, $M(j) $ is the same module, but with grading shifted by $j$, ie $M(j)_i = M_{i+j}$.
+\end{definition}
+
+\begin{example}
+    $S = K[x,y], M= S(-2)$. Then
+    \begin{align*}
+        \deg_M (2x + y) = 1 - (-2) = 3
+    \end{align*}
+\end{example}
+
+\begin{definition}
+    A graded submodule is a submodule with the induced grading $U \subset M$ such that $U_i = U \cap M_i$.
+    A homomorphism of graded modules $\phi :M \to N $ is a homomorphism with $\phi(M_i) \subset N_i$.
+\end{definition}
+
+\begin{example} Consider
+\begin{align*}
+    S(-2) & \to S\\
+    f &\mapsto x^2 f .
+\end{align*}
+This is a graded homomorphism.
+\end{example}
+
+It is true that we can arrange for the maps in the Hilbert syzygy theorem to be graded.
+
+\begin{example}
+    $S = K[x,y], M = I = (x,y)$. Then
+    \begin{center}
+        \begin{tikzcd}
+            & 0 \arrow[r] & S(-2) \arrow[r, "f"] & S^2(-1) \arrow[r, twoheadrightarrow, "g"] & (x,y) \arrow[r] & 0
+        \end{tikzcd}
+    \end{center}
+    with
+    \begin{align*}
+        f &= \begin{bmatrix} y\\-x \end{bmatrix},\\
+        g &= \begin{bmatrix} x & y \end{bmatrix}.
+    \end{align*}
+    This is called a ``Koszul complex".
+\end{example}
+
+\begin{definition}
+    In $S = K[x_1, \cdots , x_n]$ the irrelevant ideal is $B = (x_1, \cdots, x_n) $. A graded free resolution is minimal if
+    \begin{align*}
+        \phi_i (F_i ) \subseteq BF_{i-1}.
+    \end{align*}
+    Note that $B $ has no constant terms, so it bumps order up by $1$).
+\end{definition}
+
+\begin{theorem}
+    Let $M $ be a finitely generated graded $S$-module. Then
+    \begin{enumerate}
+        \item $M$ has a minimal free resolution,
+        \item any two minimal free resolutions are isomorphic.
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    Long, but includes some other results
+
+    \begin{lemma}[Graded Nakayama Lemma]
+        Let $N$ be a finitely generated graded $S$-module and $B \subset S$ be the irrelevant ideal. Suppose $n_1 , \cdots, n_k \in N$ are homogeneous with
+        \begin{align*}
+            \set{ n_1 + BN , \cdots n_k + BN}
+        \end{align*}
+        are a basis of $N / BN$ (as a vector space over $S/B \cong K$). Then $n_1 , \cdots, n_k $ generate $N$.
+    \end{lemma}
+
+    \begin{corollary}
+        A minimal generating set for $N$ has cardinality $\dim_K N / BN$.
+    \end{corollary}
+
+    \begin{lemma}
+        Suppose $\phi : N \xrightarrow[]{\sim} N' $ is an isomorphism of graded $S $-modules and let
+        \begin{align*}
+            \epsilon &: F \to N\\
+            \epsilon' &: F' \to N'
+        \end{align*}
+        be surjections from min rank free modules. Then there exists $\phi : F \xrightarrow[]{\sim} F'$ such that
+        \begin{center}
+        \begin{tikzcd}
+            & F \arrow[r, twoheadrightarrow, "\epsilon"] \arrow[d, " \! \rotatebox{270}{$\sim$}", "\ \, \psi"] & N \arrow[d, " \! \rotatebox{270}{$\sim$}", "\ \, \phi"]\\
+            & F' \arrow[r, twoheadrightarrow, "\epsilon'"] & N'
+        \end{tikzcd}
+        \end{center}
+        commutes.
+    \end{lemma}
+
+    Using these results we can prove our theorem.
+\end{proof}
+
+\subsection{Bett Numbers}
+
+\begin{definition}
+    Consider a minimal free resolution of $M$ with
+    \begin{align*}
+        F_i = \bigoplus_j S(-j)^{\beta_{i j}}.
+    \end{align*}
+    Note that $\beta_{ij}$ only depends on $M$. They are the graded Betti numbers of $M$. The ungraded Betti numbers are $\beta_i = \sum_j \beta_{ij} = \text{rank } F_i$.
+\end{definition}
+
+\begin{theorem}
+    Suppose $M$ is a finitely generated graded $S$-module. Consider a graded free resolution of $M$ with
+    \begin{align*}
+        F_i = \bigoplus_j S(-j)^{b_{i j}}.
+    \end{align*}
+    Then $b_{ij} \geq \beta_{ij}$.
+\end{theorem}
+
+The previous theorem motivates calling it a ``minimal" free resolution.

@@ -1,0 +1,291 @@
+
+\newpage
+\section{Interpreting Betti Numbers}
+
+From the last section we have the notion of the Betti numbers of finitely generated $S$-modules. Now let us turn to analyzing these.
+
+\subsection{Betti Diagram}
+
+We start with a motivating example.
+
+\begin{example}
+    Consider
+    \begin{align*}
+        S &= K [ x,y,z,w]\\
+        M = I &= (x^2 - yz , z^2 w , xyz, w^3)\\
+        V_\infty (I) &= z\text{-axis} \cup y\text{-axis} \text{(with lots of fuzz, extra fuzz at origin)}.
+    \end{align*}
+    This has a minimal free resolution given by
+    \begin{center}
+        \begin{tikzcd}
+            & 0 \arrow[r] & S(-8) \arrow[r] & S^2(-6) \oplus S^3(-7) \arrow[dl]\\ & & S^6(-5) \oplus S(-6) \arrow[r] &  S(-2) \oplus S^3 (-3) \arrow[r] & I \arrow[r] & 0
+        \end{tikzcd}
+    \end{center}
+
+    We have a notion of a Betti Diagram, a table tracking all the Betti numbers of a module.
+
+    \begin{center}
+    \begin{tabular}{ c | c c c c c }
+      & 0 & 1 & 2 & 3 & i\\
+    \cline{1-5}
+    2 & 1 &   &   &   &  \\
+    3 & 3 &   &   &   &  \\
+    4 &   & 6 & 2 &   &  \\
+    5 &   & 1 & 3 & 1 &  \\
+    \end{tabular}
+    \end{center}
+    Notice that these are shifted by $-i$, as we ``expect" Betti degrees to go down by $1$ each time we go down our free resolution, so this information is uninteresting.
+\end{example}
+
+\subsection{Projective Dimension and Regularity}
+
+\begin{definition}
+    The projective dimension of $M$ is
+    \begin{align*}
+        pd(M) = \max \set{ i \mid \beta_{ij} \neq 0 \text{ for some } j}.
+    \end{align*}
+    ``How far right the Betti diagram goes".
+\end{definition}
+
+\begin{definition}
+    The regularity of $M$ is
+    \begin{align*}
+        reg(M) = \max \set{ j \mid \beta_{i,j+i} \neq 0 \text{ for some } i}.
+    \end{align*}
+    ``How far down the Betti diagram goes".
+\end{definition}
+
+\begin{proposition}
+    For a homogeneous ideal $I \subset S$  we have
+    \begin{align*}
+        pd(S/I ) &= pd(S) + 1\\
+        reg(S / I ) &= reg(S) -1
+    \end{align*}
+\end{proposition}
+
+\begin{proof}
+    Taking the modulo adds one term to the min free resolution of $I$, which implies the result.
+\end{proof}
+
+\begin{lemma}
+    For all $M$, $pd(M) \leq n$ (this is just the Hilbert syzygy theorem).
+\end{lemma}
+
+\begin{lemma}
+    For all $M$, $reg(M) \geq \text{ degrees of the generators}$.
+\end{lemma}
+
+\begin{definition}
+    The depth of $M$ is
+    \begin{align*}
+        depth(M) &= n - pd(M) = \min \set{i \mid \beta_{n-i, j} \neq 0 \text{ for some } j}.
+    \end{align*}
+\end{definition}
+
+\subsection{Betti Functions}
+
+\begin{definition}
+    The Hilbert function of $M$ is
+    \begin{align*}
+        H_M : \Z &\to \Z_{\geq 0}\\
+        i &\mapsto \dim_K M_i.
+    \end{align*}
+    The Hilbert series of $M$ is (note this is a formal Laurent series)
+    \begin{align*}
+        H(M,t) = \sum_i H_M (i) t^i.
+    \end{align*}
+\end{definition}
+
+\begin{proposition}
+    For $M$ a finitely generated graded $S$-module we have that
+    \begin{align*}
+        H(M,t) = \frac{\sum_i (-1)^i \sum_j \beta_{ij} t^j }{(1-t)^n}.
+    \end{align*}
+    The numerator of this function is called the $K$-polynomial $K(M,t)$ of $M$.
+\end{proposition}
+
+\begin{definition}
+    Taking the $K$-polynomial and substituting $t$ for $(1-t)$ gives us the Groethendieck polynomial $\mathscr{G}(M,t)$ of $M$.
+\end{definition}
+
+\begin{definition}
+    The minimum degree in $\mathscr{G}$ is the codimension $codim (M)$ of $M$. The dimension $dim (M)$ of $M$ is $n - codim(M)$.
+\end{definition}
+
+\begin{example} Consider
+    \begin{align*}
+        M = K [x,y,z,w]/ ( x^2 - yz , z^2 w , xyz, w^3).
+    \end{align*}
+    We have the following Betti table for $I$:
+
+    \begin{center}
+    \begin{tabular}{ c | c c c c }
+      & 0 & 1 & 2 & 3 \\
+    \hline
+    2 & 1 &   &   &   \\
+    3 & 3 &   &   &   \\
+    4 &   & 6 & 2 &   \\
+    5 &   & 1 & 3 & 1 \\
+    \end{tabular}
+    \end{center}
+
+    and the following Betti table for $R/I$:
+
+    \begin{center}
+    \begin{tabular}{ c | c c c c c }
+      & 0 & 1 & 2 & 3 \\
+    \hline
+    0 & 1 &   &   &   &   \\
+    1 &   & 1 &   &   &   \\
+    2 &   & 3 &   &   &   \\
+    3 &   &   & 6 & 2 &   \\
+    4 &   &   & 1 & 3 & 1 \\
+    \end{tabular}
+    \end{center}
+
+    We get
+    \begin{align*}
+        H(M,t) &= \frac{1 - t^2 - 3t^3 + 6t^5 - t^6 -3t^7 + t^8 }{(1-t)^4}\\
+        K(M,t) &= 1 - t^2 - 3t^3 + 6t^5 - t^6 -3t^7 + t^8\\
+        \mathscr{G}(M,t) &= 12t^3 -20t^4 + 7t^5 + 6t^6 -5t^7 + t^8
+    \end{align*}
+    And thus
+    \begin{align*}
+        dim(M) &= 1\\
+        codim(M) &= 3
+    \end{align*}
+    which makes sense as $M $ is a curve.
+\end{example}
+
+\begin{definition}
+    The coefficient on the lowest degree term in $\mathscr{G}$ is the degree of $M$ (the number of lowest degree things).
+\end{definition}
+
+\subsection{Depth}
+
+\begin{definition}
+    $f \in S$ is a non-zero divisor (NZD) on $S / I $ if $(f+I ) (g+ I ) = (0+I) \implies (g+I ) = (0+I)$.
+\end{definition}
+
+Geometrically this means that $f$ vanishes on any (entire) component of $V_\infty (I)$, even an embedded component, hence the hypersurface $V_\infty (f)$ slices each component non-trivially (note, everything is homogeneous so non-trivial).
+
+\begin{definition}
+    A homogeneous $S/I$-sequence is a sequence $f_1 , \cdots, f_d$ such that $f_1$ is a NZD on $S/I$, $f_2$ is a NZD on $S/(I + (f_1) )$, $f_3$ is a NZD on $S/ (I + (f_1,f_2) $, etc. and also $I + (f_1, \cdots , f_d) \neq S$.
+\end{definition}
+
+\begin{definition}
+    The depth of $S/I$ is the maximum length of a homogeneous $S/I$-sequence.
+\end{definition}
+
+\begin{theorem}[Auslander-Buchsbaum] We have that
+\begin{align*}
+    depth(S/I ) = n - pd(S/I).
+\end{align*}
+\end{theorem}
+
+\begin{corollary}
+    We have that
+    \begin{align*}
+        depth(S/I) \leq dim \text{ of smallest cpt of } V_\infty (I).
+    \end{align*}
+\end{corollary}
+
+\begin{proof}
+    Each NZD must not vanish on any cpt, but also slices it nontrivially. If it has dimension $d$ you can slice at most $d$ times.
+\end{proof}
+
+\begin{example}
+    Consider
+    \begin{align*}
+        S &= K[x,y]\\
+        I &= (x^2, xy)\\
+        V_\infty (I) &= y \text{-axis} + \text{ extra fuzz at the origin}.
+    \end{align*}
+
+    Then we have that
+    \begin{align*}
+        \dim (S/I ) &= 1 \text{ (by staring at $V_\infty (I)$)}\\
+        depth (S/I) &= 0 \text{ (by corollary)}.
+    \end{align*}
+
+    In addition we have the Betti table
+
+    \begin{center}
+    \begin{tabular}{ c | c c c }
+      & 0 & 1 & 2 \\
+    \hline
+    0 & 1 &   &   \\
+    1 &   & 2 & 1 \\
+    \end{tabular}
+    \end{center}
+    This gives us
+    \begin{align*}
+        pd(S/I) &= 2\\
+        reg(S/I) &= 1\\
+        \implies depth(S/I) &= 2-2 = 0.
+    \end{align*}
+
+    And while we're at it then
+    \begin{align*}
+        H(S/I, t) &= \frac{1 -2t^2 +t^3}{(1-t)^2}\\
+        K(S/I, t) &=1 -2t +t^3\\
+        \mathscr{G} (S/I, t) &= t+t^2 - t^3
+    \end{align*}
+    which gives us that
+    \begin{align*}
+        codim(S/I) &= 1\\
+        dim(S/I) &= 1\\
+        deg(S/I) &= 1
+    \end{align*}
+\end{example}
+
+\subsection{Cohen-Macaulayness}
+
+\begin{definition}
+    A finitely generated $S$-module is called Cohen-Macaulay (CM) if $depth (M) = dim(M)$.
+\end{definition}
+
+This is a strange condition, as depth is algebraic and dimension is geometric.
+
+\begin{proposition}
+    If $S/I$ is CM then $V_\infty(I)$ is equidimensional, eg all components have the same dimension.
+\end{proposition}
+
+\begin{proposition}
+    A curve $V(I)$ is CM if and only if the origin is not a component (ie there is no extra fuzz).
+\end{proposition}
+
+\begin{proposition}
+    If $V(I)$ is $0$-dimensional then $S/I$ is CM.
+\end{proposition}
+
+Some examples are excluded.
+
+\subsection{Initial Ideals}
+
+We note that taking the initial ideal makes these properties change in predictable ways.
+
+\begin{theorem}
+    For all $i,j$ we have that $\beta_{ij} (S/I) \leq \beta_{ij} (S/\text{in } I)$. In particular we have
+    \begin{itemize}
+        \item $reg(S/I) \leq reg(S/\text{in } I)$
+        \item $pd(S/I) \leq pd(S/\text{in } I)$
+        \item $depth (S/I) \geq depth (S/\text{in } I)$
+        \item if $S/\text{in } I$ is CM, so is $S/I$
+    \end{itemize}
+\end{theorem}
+
+\begin{definition}
+    A Betti number $\beta_{ij}$ is extremal if there are no non-$0$ Betti numbers to its southeast.
+\end{definition}
+
+\begin{theorem}
+    If $\text{in } I$ is square-free, then all the extremal Betti numbers of $S/I$ and $S/\text{in } I$ coincide. In particular we have
+    \begin{itemize}
+        \item $reg(S/I) = reg(S/\text{in } I)$
+        \item $pd(S/I) = pd(S/\text{in } I)$
+        \item $depth (S/I) = depth (S/\text{in } I)$
+        \item $S/\text{in } I$ is CM if and only if $S/I$ is CM
+    \end{itemize}
+    
+\end{theorem} 
